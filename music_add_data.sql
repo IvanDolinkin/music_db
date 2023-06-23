@@ -19,7 +19,8 @@ INSERT INTO albums (name, year)
 VALUES 	('Master of Puppets', 1986),
 		('Garage Inc.', 1998),
 		('Мои дети не будут скучать', 2019),
-		('I Disappear', 2000);
+		('I Disappear', 2000),
+		('Test album', 2023);
 
 INSERT INTO tracks (album_id, name, duration)
 VALUES 	(1, 'Battery', '5:13'),
@@ -40,7 +41,9 @@ VALUES 	(1, 'Battery', '5:13'),
 		(3, 'Новый приют', '2:25'),
 		(3, 'Иди за второй', '3:49'),
 		(3, 'Бойня номер шесть', '3:56'),
-		(4, 'I Disappear', '4:26');
+		(4, 'I Disappear', '4:26'),
+		(5, 'Myself', '2:23'),
+		(5, 'Моя', '2:22');
 
 INSERT INTO compilation_albums (name, year)	
 VALUES	('Classic Rock Gold', 2005),

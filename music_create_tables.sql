@@ -1,36 +1,39 @@
-create table if not exists genres (
-	id serial primary key,
-	name varchar(80) not null
+CREATE TABLE IF NOT EXISTS genres(
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(80) UNIQUE NOT NULL
 	);
-create table if not exists performers (
-	id serial primary key,
-	name varchar(100) not null
+CREATE TABLE IF NOT EXISTS performers(
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(100) NOT NULL
 	);
-	create table if not exists albums (
-	id serial primary key,
-	name varchar(80) not null,
-	year integer not null
+CREATE TABLE IF NOT EXISTS albums(
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(80) NOT NULL,
+	year INTEGER NOT NULL CHECK (year BETWEEN 1900 and 2100)
 	);
-create table if not exists tracks (
-	id serial primary key,
-	album_id integer not null references albums (id),
-	name varchar(80) not null,
-	duration integer not null
+CREATE TABLE IF NOT EXISTS tracks(
+	id SERIAL PRIMARY KEY,
+	album_id INTEGER NOT NULL REFERENCES albums (id),
+	name VARCHAR(80) NOT NULL,
+	duration INTERVAL MINUTE TO SECOND NOT NULL
 	);
-create table if not exists compilation_albums (
-	id serial primary key,
-	name varchar(80) not null,
-	year integer not null
+CREATE TABLE IF NOT EXISTS compilation_albums(
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(80) NOT NULL,
+	year INTEGER NOT NULL CHECK (year BETWEEN 1900 and 2100)
 	);
-create table if not exists genre_performer (
-	genre_id integer not null references genres (id),
-	performer_id integer not null references performers (id)
+CREATE TABLE IF NOT EXISTS genre_performer(
+	genre_id INTEGER NOT NULL REFERENCES genres (id),
+	performer_id INTEGER NOT NULL REFERENCES performers (id),
+	PRIMARY KEY (genre_id, performer_id)
 	);
-create table if not exists album_performer (
-	album_id integer not null references albums (id),
-	performer_id integer not null references performers (id)
+CREATE TABLE IF NOT EXISTS album_performer(
+	album_id INTEGER NOT NULL REFERENCES albums (id),
+	performer_id INTEGER NOT NULL REFERENCES performers (id),
+	PRIMARY KEY (album_id, performer_id)
 	);
-create table if not exists track_compilation (
-	track_id integer not null references tracks (id),
-	compilation_id integer not null references compilation_albums (id)
+CREATE TABLE IF NOT EXISTS track_compilation(
+	track_id INTEGER NOT NULL REFERENCES tracks (id),
+	compilation_id INTEGER NOT NULL REFERENCES compilation_albums (id),
+	PRIMARY KEY (track_id, compilation_id)
 	);
